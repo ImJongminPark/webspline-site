@@ -184,41 +184,13 @@ function resizeAndPlay(element) {
 var videoInitialized = false;
 
 function initVideo() {
-  if (videoInitialized === true) {
-    return;
-  }
+  if (videoInitialized) return;
   videoInitialized = true;
-  vid = document.getElementById("viz_input_re10k");
-  // var cv = document.getElementById(vid.id + "Merge");
-  // cv.width = vid.videoWidth / 2;
-  // cv.height = vid.videoHeight;
-  vid.play();
-  // vid.style.height = vid.videoHeight; // Hide video without stopping it
-  playVids(vid.id);
-}
-
-function changeVideo_davis(inputviewSrc, novelviewSrc, scene) {
-  vid = document.getElementById("viz_input_re10k");
-  vid.src = inputviewSrc;
-  vid.play();
-
-  // vid = document.getElementById("viz_input_rodynrf_spiral");
-  // vid.src = novelviewSrc;
-  // vid.play();
-
-  // Remove the 'button-17-selected' class from all buttons
-  var buttons = document.querySelectorAll(".button-19");
-  buttons.forEach(function (button) {
-    button.classList.remove("button-19-selected");
-  });
-
-  // Add the 'button-17-selected' class to the clicked button
-  var selectedButton = document.getElementById("btn_davis_" + scene);
-  selectedButton.classList.add("button-19-selected");
+  document.getElementById("viz_input_main").play();
 }
 
 function togglePlay() {
-  vid = document.getElementById("viz_input_re10k");
+  var vid = document.getElementById("viz_input_main");
   if (vid.paused) {
     vid.play();
   } else {
@@ -226,45 +198,43 @@ function togglePlay() {
   }
 }
 
-function initVideo_acid() {
-  if (videoInitialized === true) {
-    return;
-  }
-  videoInitialized = true;
-  vid = document.getElementById("viz_input_acid");
-  // var cv = document.getElementById(vid.id + "Merge");
-  // cv.width = vid.videoWidth / 2;
-  // cv.height = vid.videoHeight;
-  vid.play();
-  // vid.style.height = vid.videoHeight; // Hide video without stopping it
-  playVids(vid.id);
-}
-
-function changeVideo_acid(inputviewSrc, novelviewSrc, scene) {
-  vid = document.getElementById("viz_input_acid");
-  vid.src = inputviewSrc;
+function changeVideo(src, scene) {
+  var vid = document.getElementById("viz_input_main");
+  vid.src = src;
   vid.play();
 
-  // vid = document.getElementById("viz_input_rodynrf_spiral");
-  // vid.src = novelviewSrc;
-  // vid.play();
-
-  // Remove the 'button-17-selected' class from all buttons
-  var buttons = document.querySelectorAll(".button-18");
-  buttons.forEach(function (button) {
-    button.classList.remove("button-18-selected");
+  document.querySelectorAll("#video-select-main .button-19").forEach(function (button) {
+    button.classList.remove("button-19-selected");
   });
 
-  // Add the 'button-17-selected' class to the clicked button
-  var selectedButton = document.getElementById("btn_acid_" + scene);
-  selectedButton.classList.add("button-18-selected");
+  document.getElementById("btn_" + scene).classList.add("button-19-selected");
 }
 
-function togglePlay_acid() {
-  vid = document.getElementById("viz_input_acid");
+var trajVideoInitialized = false;
+
+function initVideoTraj() {
+  if (trajVideoInitialized) return;
+  trajVideoInitialized = true;
+  document.getElementById("viz_input_traj").play();
+}
+
+function togglePlayTraj() {
+  var vid = document.getElementById("viz_input_traj");
   if (vid.paused) {
     vid.play();
   } else {
     vid.pause();
   }
+}
+
+function changeVideoTraj(src, scene) {
+  var vid = document.getElementById("viz_input_traj");
+  vid.src = src;
+  vid.play();
+
+  document.querySelectorAll("#video-select-traj .button-19").forEach(function (button) {
+    button.classList.remove("button-19-selected");
+  });
+
+  document.getElementById("btn_traj-" + scene).classList.add("button-19-selected");
 }
